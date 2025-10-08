@@ -1,0 +1,47 @@
+version: '3.8'
+services:
+  node_dev:
+    # Use an official Node.js image with a specific version (e.g., 20)
+    # Adjust this tag (e.g., node:18-alpine, node:22) as needed for your project.
+    image: node:20
+    
+    # Name the container so it's easy to find in Docker Desktop or the CLI
+    container_name: node_dev_1095
+    
+    # Map the application port from inside the container to your host machine
+    # Change 3000:3000 to something like 8080:3000 if port 3000 is used elsewhere
+    ports:
+      - "3002:3000"
+      
+    # External volume setup: Mounts your local project repository
+    # The left side (./) is the path on your host machine (where this docker-compose.yml is located)
+    # The right side (/usr/src/app) is the path inside the container
+    volumes:
+      - ./:/usr/src/app
+      
+      # OPTIONAL: Mount a volume for node_modules. This can sometimes improve performance 
+      # and prevent permission issues, especially on Windows/macOS. 
+      # Comment out or remove this line if you prefer node_modules to be part of the host volume.
+      # - node_modules:/usr/src/app/node_modules
+
+    # Set the working directory inside the container
+    working_dir: /usr/src/app
+    
+    # Keep the container running even if the main process exits, 
+    # useful for debugging and keeping the environment alive.
+    stdin_open: true # Equivalent to -i
+    tty: true        # Equivalent to -t
+    
+    # Command to run on startup. 
+    # Use a command that keeps the container alive but doesn't immediately run your app, 
+    # as you'll likely start it manually or with a debugger from VS Code.
+    command: sh -c "npm install && tail -f /dev/null"
+    
+    # Environment variables (Add any necessary environment variables here)
+    # environment:
+    #   - NODE_ENV=development
+    #   - PORT=3000
+
+# Define the optional volume for node_modules (if used above)
+# volumes:
+#   node_modules:
