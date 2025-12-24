@@ -1,0 +1,51 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    margin: 0px;
+    width: 100vw;
+    font-family: sans-serif;
+}
+
+.content-holder {
+    display: grid;
+    height: 100vh;
+    width: 100vw;
+    grid-template-rows: 90% auto;
+    grid-template-columns: 80% auto;
+    grid-template-areas: 
+        "content-area chat"
+        "action-bar action-bar"
+        ;
+}
+
+.content {
+    grid-area: content-area;
+    background-color: orange;
+}
+
+.chat {
+    grid-area: chat;
+    background-color: lightblue;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.action-bar {
+    grid-area: action-bar;
+    background-color: tomato;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.chat-item {
+    border-radius: 0.5em;
+    background-color: whitesmoke;
+    padding: 0.4em;
+}
